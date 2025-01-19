@@ -1,21 +1,28 @@
-# References when you are going to update this file:
-#  - https://github.com/docker/docker/blob/master/docs/security/seccomp.md
-#  - https://filippo.io/linux-syscall-table/
-
 whitelist_paths:
-  OP_OPEN: ["*"]
-  OP_ACCESS: ["*"]
-  OP_EXEC: ["*"]
-  OP_STAT: ["*"]
-  OP_CHMOD: ["/home/work/*", "/tmp/*"]
+  OP_OPEN:
+    - '*'
+  OP_ACCESS:
+    - '*'
+  OP_EXEC:
+    - '*'
+  OP_STAT:
+    - '*'
+  OP_CHMOD:
+    - /home/work/*
+    - /tmp/*
 exec_allowance: 0
 fork_allowance: -1
 max_child_procs: 512
 extra_envs: []
-preserved_env_keys: ["HOME", "PATH", "LANG", "PYENV_ROOT", "PYTHONPATH", "LD_LIBRARY_PATH", "LD_PRELOAD"]
-
+preserved_env_keys:
+  - HOME
+  - PATH
+  - LANG
+  - PYENV_ROOT
+  - PYTHONPATH
+  - LD_LIBRARY_PATH
+  - LD_PRELOAD
 diff_to_default: true
-
 traced_syscalls:
   - stat
   - lstat
@@ -49,7 +56,6 @@ traced_syscalls:
   - vfork
   - clone
   - clone3
-
 allowed_syscalls:
   - _exit
   - _llseek
@@ -67,6 +73,7 @@ allowed_syscalls:
   - breakpoint
   - brk
   - cacheflush
+  - cachestat
   - capget
   - capset
   - chdir
@@ -120,6 +127,7 @@ allowed_syscalls:
   - fchdir
   - fchmod
   - fchmodat
+  - fchmodat2
   - fchown
   - fchown32
   - fchownat
@@ -146,8 +154,11 @@ allowed_syscalls:
   - ftruncate
   - ftruncate64
   - futex
+  - futex_requeue
   - futex_time64
+  - futex_wait
   - futex_waitv
+  - futex_wake
   - futimens
   - futimesat
   - get_mempolicy
@@ -201,9 +212,6 @@ allowed_syscalls:
   - io_pgetevents_time64
   - io_setup
   - io_submit
-  - io_uring_enter
-  - io_uring_register
-  - io_uring_setup
   - ioctl
   - ioperm
   - iopl
@@ -230,6 +238,7 @@ allowed_syscalls:
   - lstat
   - lstat64
   - madvise
+  - map_shadow_stack
   - mbind
   - membarrier
   - memfd_create
@@ -359,6 +368,7 @@ allowed_syscalls:
   - sendmsg
   - sendto
   - set_mempolicy
+  - set_mempolicy_home_node
   - set_robust_list
   - set_thread_area
   - set_tid_address
